@@ -11,6 +11,9 @@ import requests
 import json
 import datetime
 from docusign_esign import ApiClient
+import logging
+
+logger = logging.getLogger(__name__)
 
 def register_view(request):
     """User registration view"""
@@ -80,6 +83,7 @@ def docusign_auth(request):
     
     # Generate consent URL
     redirect_uri = request.build_absolute_uri(reverse('users:docusign_callback'))
+    logger.warning(f"Generated DocuSign Redirect URI for auth request: {redirect_uri}")
     
     consent_url = (
         f"https://{auth_server}/oauth/auth"
@@ -106,7 +110,8 @@ def docusign_callback(request):
     auth_server = settings.DOCUSIGN_AUTH_SERVER if hasattr(settings, 'DOCUSIGN_AUTH_SERVER') else 'account-d.docusign.com'
     
     # Exchange code for token
-    redirect_uri = request.build_absolute_uri(reverse('users:docusign_callback'))
+    redirect_uri_callback = request.build_absolute_uri(reverse('users:docusign_callback'))
+    logger.warning(f"Generated DocuSign Redirect URI for token exchange: {redirect_uri_callback}")
     
     try:
         url = f"https://{auth_server}/oauth/token"
@@ -115,7 +120,7 @@ def docusign_callback(request):
             'code': code,
             'client_id': credentials.client_id,
             'client_secret': credentials.client_secret,
-            'redirect_uri': redirect_uri
+            'redirect_uri': redirect_uri_callback
         }
         
         response = requests.post(url, data=data)
@@ -131,7 +136,14 @@ def docusign_callback(request):
         
         messages.success(request, 'Successfully authenticated with DocuSign!')
     except Exception as e:
-        messages.error(request, f'Authentication failed: {str(e)}')
+        # Log the actual error from DocuSign if available
+        error_details = ""
+        try:
+            error_details = response.json()
+        except:
+            pass # Ignore if response is not JSON
+        logger.error(f"DocuSign token exchange failed. Status: {response.status_code if 'response' in locals() else 'N/A'}, Response: {error_details}, Exception: {str(e)}")
+        messages.error(request, f'Authentication failed. Check logs for details.') # More generic message to user
     
     return redirect('users:docusign_settings')
 
