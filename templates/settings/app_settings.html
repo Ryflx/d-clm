@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Settings - DocuSign CLM API Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h2 class="mb-0">Application Settings</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        <label for="logo" class="form-label">Application Logo</label>
+                        {% if settings.logo %}
+                        <div class="mb-3">
+                            <img src="{{ settings.logo.url }}" alt="Current Logo" class="img-thumbnail" style="max-height: 100px;">
+                        </div>
+                        {% endif %}
+                        <input type="file" class="form-control" id="logo" name="logo" accept="image/*">
+                        <div class="form-text">Upload a logo for the application (optional).</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="sourcing_login_title" class="form-label">Sourcing Login Title</label>
+                        <input type="text" class="form-control" id="sourcing_login_title" name="sourcing_login_title" 
+                               value="{{ settings.sourcing_login_title }}">
+                        <div class="form-text">Customize the title for the Sourcing Login feature.</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Document Attributes - DocuSign CLM API Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h2 class="mb-0">Get Document Attributes</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Enter a Document ID to retrieve its attributes</p>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="document_id" class="form-label">Document ID</label>
+                        <input type="text" class="form-control" id="document_id" name="document_id" required>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Get Attributes</button>
+                    </div>
+                </form>
+                
+                {% if document_attributes %}
+                <hr>
+                <div class="mt-4">
+                    <h4>Document Attributes</h4>
+                    
+                    <div class="mb-3">
+                        <label for="search_term" class="form-label">Search Document Attributes</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="search_term" placeholder="Enter search term">
+                            <button class="btn btn-outline-secondary" type="button" id="search_button">Search</button>
+                        </div>
+                        <div class="form-text">Enter a search term to filter attributes (e.g., 'Status: Contract Review')</div>
+                    </div>
+                    
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="show_full_json">
+                        <label class="form-check-label" for="show_full_json">
+                            Show Full JSON
+                        </label>
+                    </div>
+                    
+                    <div id="search_results" class="mb-3"></div>
+                    
+                    <div class="accordion" id="attributesAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Full JSON Response
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#attributesAccordion">
+                                <div class="accordion-body">
+                                    <pre>{{ document_attributes_json }}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const searchButton = document.getElementById('search_button');
+                        const searchInput = document.getElementById('search_term');
+                        const resultsDiv = document.getElementById('search_results');
+                        const showFullJson = document.getElementById('show_full_json');
+                        const accordionElement = document.getElementById('collapseOne');
+                        
+                        // Function to filter attributes based on search term
+                        function filterAttributes(searchTerm) {
+                            if (!searchTerm) {
+                                resultsDiv.innerHTML = '';
+                                return;
+                            }
+                            
+                            const documentAttributes = JSON.parse('{{ document_attributes_json|escapejs }}');
+                            const results = [];
+                            
+                            function searchRecursive(obj, path = []) {
+                                if (typeof obj === 'object' && obj !== null) {
+                                    for (const key in obj) {
+                                        const currentPath = [...path, key];
+                                        const value = obj[key];
+                                        
+                                        if (typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                            results.push({
+                                                path: currentPath,
+                                                key: key,
+                                                value: value,
+                                                fullPath: currentPath.join(' > ')
+                                            });
+                                        } else if (typeof key === 'string' && key.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                            results.push({
+                                                path: currentPath,
+                                                key: key,
+                                                value: value,
+                                                fullPath: currentPath.join(' > ')
+                                            });
+                                        }
+                                        
+                                        if (typeof value === 'object' && value !== null) {
+                                            searchRecursive(value, currentPath);
+                                        }
+                                    }
+                                } else if (Array.isArray(obj)) {
+                                    obj.forEach((item, index) => {
+                                        const currentPath = [...path, `[${index}]`];
+                                        searchRecursive(item, currentPath);
+                                    });
+                                }
+                            }
+                            
+                            searchRecursive(documentAttributes);
+                            
+                            if (results.length === 0) {
+                                resultsDiv.innerHTML = `<div class="alert alert-info">No matches found for '${searchTerm}'</div>`;
+                            } else {
+                                resultsDiv.innerHTML = `<div class="alert alert-success">Found ${results.length} matches for '${searchTerm}'</div>`;
+                                
+                                const resultsList = document.createElement('div');
+                                results.forEach(item => {
+                                    const resultItem = document.createElement('div');
+                                    resultItem.className = 'mb-2';
+                                    
+                                    let value = item.value;
+                                    if (typeof value === 'string') {
+                                        // Highlight the matching text
+                                        value = value.replace(
+                                            new RegExp(searchTerm, 'gi'),
+                                            match => `<span class="bg-warning text-dark">${match}</span>`
+                                        );
+                                        resultItem.innerHTML = `<strong>${item.key}:</strong> ${value}`;
+                                    } else {
+                                        resultItem.innerHTML = `<strong>${item.key}:</strong> ${JSON.stringify(value)}`;
+                                    }
+                                    
+                                    resultsList.appendChild(resultItem);
+                                });
+                                
+                                resultsDiv.appendChild(resultsList);
+                            }
+                        }
+                        
+                        // Search button click handler
+                        searchButton.addEventListener('click', function() {
+                            filterAttributes(searchInput.value);
+                        });
+                        
+                        // Enter key in search input
+                        searchInput.addEventListener('keypress', function(e) {
+                            if (e.key === 'Enter') {
+                                e.preventDefault();
+                                filterAttributes(searchInput.value);
+                            }
+                        });
+                        
+                        // Show/hide full JSON
+                        showFullJson.addEventListener('change', function() {
+                            if (this.checked) {
+                                new bootstrap.Collapse(accordionElement, { toggle: true });
+                            } else {
+                                new bootstrap.Collapse(accordionElement, { toggle: false });
+                            }
+                        });
+                    });
+                </script>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

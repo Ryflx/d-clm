@@ -1,0 +1,77 @@
+{% extends 'base/base.html' %}
+
+{% block title %}DocuSign Settings - DocuSign CLM API Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h2 class="mb-0">DocuSign Integration Settings</h2>
+            </div>
+            <div class="card-body">
+                {% if credentials.is_configured %}
+                <div class="alert alert-success">
+                    <strong>Connected!</strong> Your DocuSign integration is configured.
+                </div>
+                {% endif %}
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="client_id" class="form-label">DocuSign Integration Key (Client ID)</label>
+                        <input type="text" class="form-control" id="client_id" name="client_id" 
+                               value="{{ credentials.client_id|default:'' }}" required>
+                        <div class="form-text">Your DocuSign Integration Key from the DocuSign developer portal.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="client_secret" class="form-label">DocuSign Secret Key</label>
+                        <input type="password" class="form-control" id="client_secret" name="client_secret" 
+                               value="{{ credentials.client_secret|default:'' }}" required>
+                        <div class="form-text">Your DocuSign Secret Key from the DocuSign developer portal.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="account_id" class="form-label">DocuSign Account ID</label>
+                        <input type="text" class="form-control" id="account_id" name="account_id" 
+                               value="{{ credentials.account_id|default:'' }}" required>
+                        <div class="form-text">Your DocuSign Account ID.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="auth_server" class="form-label">DocuSign Auth Server</label>
+                        <input type="text" class="form-control" id="auth_server" name="auth_server" 
+                               value="{{ auth_server|default:'account-d.docusign.com' }}">
+                        <div class="form-text">The DocuSign authentication server hostname.</div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                    </div>
+                </form>
+                
+                {% if credentials.is_configured %}
+                <hr>
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <h4 class="mb-0">DocuSign Authentication</h4>
+                    <div>
+                        {% if credentials.is_token_valid %}
+                        <span class="badge bg-success">Authenticated</span>
+                        {% else %}
+                        <span class="badge bg-warning text-dark">Not Authenticated</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="mt-2">You need to authenticate with DocuSign to use the API features.</p>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'users:docusign_auth' %}" class="btn btn-primary">
+                        {% if credentials.is_token_valid %}
+                        Re-authenticate with DocuSign
+                        {% else %}
+                        Authenticate with DocuSign
+                        {% endif %}
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

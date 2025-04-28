@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Home - DocuSign CLM API Portal{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="text-center mb-4">Available Features</h1>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for feature in features %}
+    <div class="col">
+        <div class="feature-card">
+            <img src="{{ feature.image_url }}" class="feature-image" alt="{{ feature.title }}">
+            <div class="feature-title">{{ feature.title }}</div>
+            <div class="feature-description">{{ feature.description }}</div>
+            {% if feature.is_active %}
+                <a href="{% url feature.url_name %}" class="btn btn-primary mt-3 w-75">Get Started</a>
+            {% else %}
+                <button class="btn btn-secondary mt-3 w-75" disabled>Coming Soon</button>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

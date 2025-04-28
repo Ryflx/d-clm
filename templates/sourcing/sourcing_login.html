@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Sourcing Login - DocuSign CLM API Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h2 class="mb-0">{{ sourcing_title|default:"Sourcing System Login" }}</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Enter supplier details to onboard a new supplier</p>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="supplier_name" class="form-label">Supplier Name</label>
+                        <input type="text" class="form-control" id="supplier_name" name="supplier_name" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="supplier_email" class="form-label">Supplier Email</label>
+                        <input type="email" class="form-control" id="supplier_email" name="supplier_email" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="supplier_phone" class="form-label">Supplier Phone</label>
+                        <input type="tel" class="form-control" id="supplier_phone" name="supplier_phone">
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+                
+                {% if success %}
+                <div class="alert alert-success mt-4">
+                    <strong>Success!</strong> Supplier onboarding request submitted successfully.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
