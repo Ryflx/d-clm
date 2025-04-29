@@ -16,10 +16,10 @@
             <img src="{{ feature.image_url }}" class="feature-image" alt="{{ feature.title }}">
             <div class="feature-title">{{ feature.title }}</div>
             <div class="feature-description">{{ feature.description }}</div>
-            {% if feature.is_active %}
+            {% if feature.is_active and docusign_authenticated %}
                 <a href="{% url feature.url_name %}" class="btn btn-primary mt-3 w-75">Get Started</a>
             {% else %}
-                <button class="btn btn-secondary mt-3 w-75" disabled>Coming Soon</button>
+                <button class="btn btn-secondary mt-3 w-75" disabled>{% if feature.is_active %}Authenticate DocuSign First{% else %}Coming Soon{% endif %}</button>
             {% endif %}
         </div>
     </div>

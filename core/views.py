@@ -2,11 +2,23 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from core.models import Feature
+from users.models import DocusignCredentials
 
 @login_required
 def home(request):
     """Home view displaying the feature catalog"""
     features = Feature.objects.all()
+    
+    # Check DocuSign authentication status
+    docusign_authenticated = False
+    try:
+        credentials = DocusignCredentials.objects.get(user=request.user)
+        # Consider a feature active if configured and token is valid (or just configured for simplicity)
+        # Let's start by just checking if it's configured.
+        # We could add credentials.is_token_valid() check later if needed.
+        docusign_authenticated = credentials.is_configured
+    except DocusignCredentials.DoesNotExist:
+        docusign_authenticated = False # Not configured yet
     
     # Map features to their respective URLs and image paths
     feature_data = []
@@ -33,4 +45,7 @@ def home(request):
             'image_url': image_url
         })
     
-    return render(request, 'core/home.html', {'features': feature_data})
+    return render(request, 'core/home.html', {
+        'features': feature_data,
+        'docusign_authenticated': docusign_authenticated
+    })
