@@ -66,6 +66,7 @@ WSGI_APPLICATION = 'docusign_clm_portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Default to SQLite, but override if DATABASE_URL is set
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -74,9 +75,9 @@ DATABASES = {
 }
 
 # Configure database from DATABASE_URL environment variable (if present)
-# DATABASE_URL = os.environ.get('DATABASE_URL') # Removed
-# if DATABASE_URL: # Removed
-#    DATABASES['default'] = dj_database_url.parse(DATABASE_URL) # Removed
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL:
+   DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -108,7 +109,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

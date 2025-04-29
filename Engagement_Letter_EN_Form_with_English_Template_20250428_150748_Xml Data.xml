@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-16" standalone="yes"?>
+<TemplateFieldData displayName="" displayValue="">
+  <Workflow_Config displayName="Workflow Config" displayValue="Workflow Config">
+    <WF_Routing>DOCGEN</WF_Routing>
+    <Attribute__Engagement_Letter__Document_Type>Engagement Letter</Attribute__Engagement_Letter__Document_Type>
+    <Attribute__Engagement_Letter__Language>English</Attribute__Engagement_Letter__Language>
+    <Attribute__ContractVersion__Status>Draft</Attribute__ContractVersion__Status>
+    <Attribute__Engagement_Letter__Currency>USD</Attribute__Engagement_Letter__Currency>
+    <Attribute__Engagement_Letter__Value>446,850.00</Attribute__Engagement_Letter__Value>
+    <Attribute__Engagement_Letter__Value_unformatted>446850.00</Attribute__Engagement_Letter__Value_unformatted>
+    <Attribute__Engagement_Letter__Template>Deloitte Paper</Attribute__Engagement_Letter__Template>
+    <OppId>006fI000002gTkXQAU</OppId>
+  </Workflow_Config>
+  <Deloitte_Details displayName="Deloitte Details" displayValue="Deloitte Details">
+    <Attribute__Engagement_Letter__Internal_Contracting_Entity key="Deloitte GmbH">Deloitte GmbH</Attribute__Engagement_Letter__Internal_Contracting_Entity>
+  </Deloitte_Details>
+  <Engagement_Letter_Options displayName="Engagement Letter Options" displayValue="Engagement Letter Options">
+    <Attribute__Engagement_Letter__Start_Date>28/04/2025</Attribute__Engagement_Letter__Start_Date>
+    <Attribute__Engagement_Letter__Start_Date_unformatted>2025-04-28T00:00:00.0000000</Attribute__Engagement_Letter__Start_Date_unformatted>
+    <Attribute__Engagement_Letter__Term key="36">36</Attribute__Engagement_Letter__Term>
+    <Termination displayName="Termination" displayValue="Termination">
+      <Termination_Container displayValue="EN Standard Termination">
+        <Termination_TermName displayValue="EN Standard Termination">
+          <TerminationText><![CDATA[<html><head><meta charset='UTF-8'></head><body><p>The engagement in this Letter may be terminated any time by written notice from DELOITTE<span></span><br></p></body></html>]]></TerminationText>
+          <TerminationNotes>&lt;p&gt;Preferred Clause&lt;/p&gt;</TerminationNotes>
+        </Termination_TermName>
+      </Termination_Container>
+    </Termination>
+    <Governing_Law displayName="Governing Law" displayValue="Governing Law">
+      <Governing_Law_Container displayValue="EN Germany">
+        <Governing_Law_TermName displayValue="EN Germany">
+          <Governing_LawText><![CDATA[<html><head><meta charset='UTF-8'></head><body><p>This letter will be governed by and construed in accordance with German law and, for the benefit of DELOITTE, you hereby submit to the exclusive jurisdiction of the German courts.</p></body></html>]]></Governing_LawText>
+          <Governing_LawNotes>&lt;p&gt;Preferred Option German Law&lt;/p&gt;</Governing_LawNotes>
+        </Governing_Law_TermName>
+      </Governing_Law_Container>
+    </Governing_Law>
+    <Non_Solicitation displayName="Non Solicitation" displayValue="Non Solicitation">
+      <Non_Solicitation_Container displayValue="EN Preferred Option">
+        <Non_Solicitation_TermName displayValue="EN Preferred Option">
+          <Non_SolicitationText><![CDATA[<html><head><meta charset='UTF-8'></head><body><p>Neither party shall, without the prior written consent of the other, which will not be unreasonably withheld, either directly or indirectly (that is using a third party to contact named targeted persons on specific request) solicit for employment or employ or engage any employee of the other party who has been involved in the provision or directly in receipt of the services.
+</p></body></html>]]></Non_SolicitationText>
+          <Non_SolicitationNotes>&lt;p&gt;Preferred Option EN&lt;/p&gt;</Non_SolicitationNotes>
+        </Non_Solicitation_TermName>
+      </Non_Solicitation_Container>
+    </Non_Solicitation>
+    <Supplemental_Documents_Attachments displayName="Supplemental Documents">
+      <Supplemental_Documents>Deloitte Engagement Offer Presentation (1).pptx</Supplemental_Documents>
+      <Supplemental_Documents_Count>1</Supplemental_Documents_Count>
+      <Supplemental_Documents_SingleValue>
+        <Document>
+          <Name>Deloitte Engagement Offer Presentation (1).pptx</Name>
+          <Uid>aeadb388-4224-f011-a142-9440c98d8e91</Uid>
+          <Path>/DS/Other Sources/Salesforce/Account/Brand AG/Opportunity/Brand AG Consulting Services/Deloitte Engagement Offer Presentation (1).pptx</Path>
+          <Source>Upload</Source>
+        </Document>
+      </Supplemental_Documents_SingleValue>
+    </Supplemental_Documents_Attachments>
+  </Engagement_Letter_Options>
+  <Engagement_Letter_Details displayName="Engagement Letter Details" displayValue="Engagement Letter Details">
+    <Attribute__Engagement_Letter__Title>Brand AG Consulting Services</Attribute__Engagement_Letter__Title>
+    <Attribute__Engagement_Letter__Proposal_Number></Attribute__Engagement_Letter__Proposal_Number>
+    <Attribute__Engagement_Letter__Internal_Sales_Contact_Name>Jesse Morgan</Attribute__Engagement_Letter__Internal_Sales_Contact_Name>
+    <Sales_Contact_Email>volker.diedrich@docusign.com</Sales_Contact_Email>
+    <ExternalParty__Customer_Name>Brand AG</ExternalParty__Customer_Name>
+    <Client_Street>Marktstrasse 150</Client_Street>
+    <Client_Zip_Code>10900</Client_Zip_Code>
+    <Client_City>Berlin</Client_City>
+    <Attribute__Engagement_Letter__Daily_Rate>1,100.00</Attribute__Engagement_Letter__Daily_Rate>
+    <Attribute__Engagement_Letter__Daily_Rate_unformatted>1100.00</Attribute__Engagement_Letter__Daily_Rate_unformatted>
+    <Attribute__Engagement_Letter__Travel_Cost_Type key="Time &amp; Material">Time &amp; Material</Attribute__Engagement_Letter__Travel_Cost_Type>
+    <Attribute__Engagement_Letter__Client_Contact_Name>Volker Diedrich</Attribute__Engagement_Letter__Client_Contact_Name>
+    <Contact_Position>Project Manager</Contact_Position>
+    <Attribute__Engagement_Letter__Date_of_Proposal_Effectiveness>01/07/2025</Attribute__Engagement_Letter__Date_of_Proposal_Effectiveness>
+    <Attribute__Engagement_Letter__Date_of_Proposal_Effectiveness_unformatted>2025-07-01T00:00:00.0000000</Attribute__Engagement_Letter__Date_of_Proposal_Effectiveness_unformatted>
+  </Engagement_Letter_Details>
+  <Engagement_Letter_Line_Items displayName="Engagement Letter Line Items" displayValue="Engagement Letter Line Items">
+    <Services_Container displayName="Services" displayValue="Services">
+      <Services displayName="" displayValue="">
+        <Position>00000006</Position>
+        <Product>Physical Server</Product>
+        <Avg_Daily_Rate>$1,100.00</Avg_Daily_Rate>
+        <Avg_Daily_Rate_unformatted>1100.00</Avg_Daily_Rate_unformatted>
+        <Man_Days>4.00</Man_Days>
+        <Man_Days_unformatted>4.00</Man_Days_unformatted>
+        <Total_Item_Price>$4,400.00</Total_Item_Price>
+        <Total_Item_Price_unformatted>4400.00</Total_Item_Price_unformatted>
+      </Services>
+      <Services displayName="" displayValue="">
+        <Position>00000007</Position>
+        <Product>Cloud Infrastructure Setup</Product>
+        <Avg_Daily_Rate>$1,250.00</Avg_Daily_Rate>
+        <Avg_Daily_Rate_unformatted>1250.00</Avg_Daily_Rate_unformatted>
+        <Man_Days>17.00</Man_Days>
+        <Man_Days_unformatted>17.00</Man_Days_unformatted>
+        <Total_Item_Price>$21,250.00</Total_Item_Price>
+        <Total_Item_Price_unformatted>21250.00</Total_Item_Price_unformatted>
+      </Services>
+      <Services displayName="" displayValue="">
+        <Position>00000008</Position>
+        <Product>Custom Software Development</Product>
+        <Avg_Daily_Rate>$1,200.00</Avg_Daily_Rate>
+        <Avg_Daily_Rate_unformatted>1200.00</Avg_Daily_Rate_unformatted>
+        <Man_Days>51.00</Man_Days>
+        <Man_Days_unformatted>51.00</Man_Days_unformatted>
+        <Total_Item_Price>$61,200.00</Total_Item_Price>
+        <Total_Item_Price_unformatted>61200.00</Total_Item_Price_unformatted>
+      </Services>
+      <Services displayName="" displayValue="">
+        <Position>00000009</Position>
+        <Product>Enterprise Resource Planning (ERP) Implementation</Product>
+        <Avg_Daily_Rate>$1,550.00</Avg_Daily_Rate>
+        <Avg_Daily_Rate_unformatted>1550.00</Avg_Daily_Rate_unformatted>
+        <Man_Days>160.00</Man_Days>
+        <Man_Days_unformatted>160.00</Man_Days_unformatted>
+        <Total_Item_Price>$248,000.00</Total_Item_Price>
+        <Total_Item_Price_unformatted>248000.00</Total_Item_Price_unformatted>
+      </Services>
+      <Services displayName="" displayValue="">
+        <Position>00000010</Position>
+        <Product>Customer Relationship Management (CRM) Solution</Product>
+        <Avg_Daily_Rate>$1,400.00</Avg_Daily_Rate>
+        <Avg_Daily_Rate_unformatted>1400.00</Avg_Daily_Rate_unformatted>
+        <Man_Days>80.00</Man_Days>
+        <Man_Days_unformatted>80.00</Man_Days_unformatted>
+        <Total_Item_Price>$112,000.00</Total_Item_Price>
+        <Total_Item_Price_unformatted>112000.00</Total_Item_Price_unformatted>
+      </Services>
+      <Man_Days_Total>312.00</Man_Days_Total>
+      <Total_Item_Price_Total>$446,850.00</Total_Item_Price_Total>
+    </Services_Container>
+  </Engagement_Letter_Line_Items>
+</TemplateFieldData>

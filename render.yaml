@@ -10,7 +10,7 @@ services:
       - key: DJANGO_DEBUG
         value: false
       - key: ALLOWED_HOSTS
-        value: .onrender.com
+        value: clm-api-examples.onrender.com
       # No DATABASE_URL reference - will use SQLite
 
 # No database section - SQLite will be used by default
